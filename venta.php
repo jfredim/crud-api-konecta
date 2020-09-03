@@ -9,9 +9,12 @@ Acess-Control-Allow-Methods, Authorization");
 $data = json_decode(file_get_contents("php://input"), true);
 $id = $data["id"];
 $cantidad = $data["cantidad"];
+
 require_once "dbconfig.php";
 
-echo $query = "UPDATE tbl_productos   SET stock=stock-'".$cantidad."'   
+
+
+echo $query = "UPDATE tbl_productos   SET stock=stock-'".$cantidad."', fecha_ult_venta=sysdate()
                            WHERE id='".$id."' ";
 
 if(mysqli_query($conn, $query) or die("Update Query Failed"))
